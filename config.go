@@ -7,6 +7,8 @@ type Config struct {
 	checks    SearcherSet
 }
 
-func getValuesFrom(input string) map[string]string {
+func getValuesFrom(input string, checks SearcherSet) map[string]string {
+	for i := 0; i < len(checks); i++ {
 
+	}
 }
