@@ -10,8 +10,8 @@ type Config struct {
 func GetValuesFrom(input string, checks SearcherSet) []string {
 	found := make([]string, 0)
 	for i := 0; i < len(checks); i++ {
-		result, err := checks[i].Find(input)
-		if !err {
+		result, ok := checks[i].Find(input)
+		if ok {
 			for j := 0; j < len(result); j++ {
 				found = append(found, result[i])
 			}
