@@ -6,5 +6,9 @@ import (
 )
 
 func main() {
-	fmt.Println("Hello World!")
+	checksList := SearcherSet{RegexpGetter{"bla\\b"}, RegexpGetter{"b."}}
+
+	config := Config{"string", checksList}
+
+	fmt.Print(GetValuesFrom("bla bla bla", checksList), config)
 }
