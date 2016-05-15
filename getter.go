@@ -11,6 +11,10 @@ type RegexpGetter struct {
 	pattern string
 }
 
+type RegexpSubmatchGetter struct {
+	pattern string
+}
+
 type XpathGetter struct {
 	xpath string
 }
@@ -23,6 +27,18 @@ func (getter RegexpGetter) Find(input string) ([]string, bool) {
 	regexpId := regexp.MustCompile(getter.pattern)
 	if regexpId.MatchString(input) {
 		return regexpId.FindAllString(input, -1), true
+	}
+	return nil, false
+}
+
+func (getter RegexpSubmatchGetter) Find(input string) ([]string, bool) {
+	if regexpId := regexp.MustCompile(getter.pattern); regexpId.MatchString(input) {
+		response := regexpId.FindAllStringSubmatch(input, -1)
+		result := make([]string, len(response))
+		for index := 0; index < len(response); index++ {
+			result[index] = response[index][1]
+		}
+		return result, true
 	}
 	return nil, false
 }
